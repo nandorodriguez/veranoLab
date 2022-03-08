@@ -1,0 +1,241 @@
+<template>
+  <div>
+    <div class="banner-first" style="height:3rem; width=100%">
+      <p class="color-white">El bienestar es un concepto que nos genera plenitud y satisfacción</p>
+    </div>
+    <!--Main Menu/ Mobile Menu Section-->
+    <section class="menu-section-area">
+      <!-- Navigation -->
+   
+      <b-navbar     
+        v-b-scrollspy:list-of-sections
+        v-b-scrollspy="20"
+        class="bg-light
+          navbar navbar-expand-lg
+          d-none d-sm-none d-md-block d-lg-block d-xl-block 
+        "
+        id="mainNav"
+        
+      >
+      
+        <div class="d-flex flex-row mx-3 ml-5 w-100">
+          <nuxt-link class="navbar-brand js-scroll-trigger" to="/">
+            <b-img
+              :src="require('../assets/img/logo.png')"
+              img-alt="RATH Logo"
+              class="img-fluid logo"
+            ></b-img>
+          </nuxt-link>
+          <button
+            class="navbar-toggler navbar-toggler-right"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-right ml-auto">
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="/" target="_self"
+                  >INICIO</a
+                >
+              </li>
+               <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="/contact" target="_self"
+                  >PROGRAMAS</a
+                >
+              </li>
+               <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="/about" target="_self"
+                  >SOMOS</a
+                >
+              </li>
+               <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="/" target="_self"
+                  >CONTACTO</a
+                >
+              </li>  
+            </ul>
+          </div>
+        </div>
+      </b-navbar>
+      <!-- Navigation -->
+
+      <!-- Mobile Menu Start -->
+      <b-navbar
+        toggleable="lg"
+        v-b-scrollspy:list-of-sections
+        v-b-scrollspy="20"
+        class="mobile_menu fixed-top hidden d-none"
+        id="mainNavMobile"
+      >
+       <div class="banner-first" style="height:3rem; width=100%">
+          <p class="color-white text-center">El bienestar es un concepto que nos genera plenitud y satisfacción</p>
+       </div>
+        <b-container fluid>
+          <b-navbar-brand to="/"
+            ><b-img
+              :src="require('../assets/img/logo.png')"
+              img-alt="RATH Logo"
+              class="ml-4 ml-sm-4 ml-md-0 mobile-logo"
+            ></b-img
+          ></b-navbar-brand>
+
+          <b-navbar-toggle class="mr-4 mr-sm-4 mr-md-0" target="nav-collapse">
+            <template v-slot:default="{ expanded }">
+              <b-icon v-if="expanded" icon="x"></b-icon>
+              <b-icon v-else icon="list"></b-icon>
+            </template>
+          </b-navbar-toggle>
+
+          <b-collapse id="nav-collapse" is-nav>
+            <!-- Right aligned nav items -->
+            <b-navbar-nav class="ml-auto">
+              <b-nav-item href="#about">INICIO</b-nav-item>
+              <b-nav-item-dropdown
+                to="#"
+                text="PROGRAMA INGLES"
+                no-caret
+                class="fas fa-angle-down"
+              >
+              </b-nav-item-dropdown>
+              <b-nav-item-dropdown
+                to="#"
+                text="QUE OFRECEMOS"
+                no-caret
+                class="fas fa-angle-down"
+              >
+              </b-nav-item-dropdown>
+              <b-nav-item href="#screenshots">QUIENES SOMOS</b-nav-item>
+              <b-nav-item href="#features">BLOG</b-nav-item>
+              <b-nav-item href="#reviews">CONTÁCTENOS</b-nav-item>
+            </b-navbar-nav>
+          </b-collapse>
+        </b-container>
+      </b-navbar>
+      <!-- Mobile Menu End -->
+    </section>
+    <!--Main Menu/ Mobile Menu Section-->
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Header1",
+
+  mounted: function() {
+    // Menu Js
+    this.$nextTick(function() {
+      window.onscroll = function() {
+        myFunction();
+      };
+
+      var header = document.getElementById("mainNav");
+      var sticky = header.offsetTop;
+
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("navbar-shrink");
+        } else {
+          header.classList.remove("navbar-shrink");
+        }
+      }
+    });
+    // Menu End
+  }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+/* Mobile Dropdown CSS */
+.banner-first{
+  background:linear-gradient(270deg, rgba(218,194,96,1) 0%, rgba(111,190,199,1) 100%);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.banner-first p{
+  font-size: 1.4vh;
+}
+.menu-section-area #mainNavMobile.navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
+  padding: 0 1rem;
+}
+#mainNavMobile .navbar-nav {
+  background: #fff;
+}
+#mainNavMobile .navbar-toggler {
+  color: #ca3381;
+  border-color: transparent;
+  font-size: 34px;
+  padding: 0.25rem 0;
+}
+#mainNavMobile .navbar-nav li.nav-item {
+  z-index: 9;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+#mainNavMobile .navbar-nav li.nav-item:hover,
+#mainNavMobile .navbar-nav li.nav-item.active {
+  background-color: #2ca6ef;
+}
+#mainNavMobile .navbar-nav li:last-child:hover {
+  background-color: transparent;
+}
+#mainNavMobile .navbar-nav .nav-link {
+  color: #fff;
+  padding: 16px 15px 18px;
+  line-height: 15px;
+}
+.menu-section-area .nav-item.dropdown::before {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 20px;
+  z-index: -1;
+  color: #fff;
+}
+.menu-section-area .nav-item .nav-link,
+ul.dropdown-menu .dropdown-item {
+  font-weight: normal;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+}
+#mainNavMobile .navbar-nav li:last-child span {
+  width: auto;
+  text-align: center;
+  padding: 11px 27px 16px;
+}
+#mainNavMobile .navbar-nav li .dropdown-item {
+  padding: 16px 15px 18px;
+}
+#mainNavMobile .navbar-nav ul.dropdown-menu li:hover {
+  background-color: #2ca6ef;
+}
+#mainNavMobile .dropdown-item:hover,
+#mainNavMobile .dropdown-item:focus {
+  color: #fff;
+  background-color: transparent;
+}
+#mainNavMobile .navbar-nav li.nav-item:hover,
+#mainNavMobile .navbar-nav li.nav-item.active {
+  background-color: #2c303a;
+}
+
+.navbar {
+  padding: 0.5rem 0rem;
+}
+.menu-section-area #mainNavMobile.navbar {
+  padding: 0;
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: 0;
+}
+</style>
