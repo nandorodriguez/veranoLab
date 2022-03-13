@@ -57,7 +57,7 @@
       </div>
     </section>
     <section class="container-main-right col-lg-4 col-md-4 col-sm-8">
-      <img src="@/assets/img/bannerthree.png" alt="" />
+      <img src="../../assets/img/bannerone.png" alt="" />
       <div class="main-text-container w-100 text-center my-4">
         <h2>Inscríbete al programa</h2>
         <h2>¡Ahora mismo!</h2>
@@ -273,7 +273,7 @@ export default {
   font-family: "Montserrat Bold", sans-serif;
   font-size: 8.6vw;
   color: #ffbc00;
-  
+
 }
 
 .data-number span:nth-child(2) {
@@ -327,7 +327,7 @@ display: flex;
   font-style: italic;
   font-weight: bold;
   padding-top: 10px;
-  
+
 }
 
 .final-title{
@@ -358,11 +358,11 @@ display: flex;
   font-size: 3.6vw;
 }
 .content-number {
-  padding: 2vw 15vw; 
+  padding: 2vw 15vw;
 }
 .data-number span:nth-child(2) {
     font-size: 1.09vw;
-   
+
 }
 
 }

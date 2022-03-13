@@ -35,7 +35,7 @@
       <div class="container-banner-left col-lg-5 col-md-6 px-0 col-sm-12  "></div>
     </div>
       <div class="box-container justify-content-center">
-        <div class="container-content row  ">
+        <div class="container-content row">
           <div class="content-title col-lg-6  col-md-6">
             <span>ESCOGE UNO DE</span>
             <h1>Nuestros cursos</h1>
@@ -71,9 +71,9 @@
             <div class="description"><p>04.Lorem ipsum</p></div>
           </div>
         </div>
-        </div> 
+        </div>
       </div>
-    
+
   </main>
 </template>
 
@@ -82,11 +82,15 @@ export default {};
 </script>
 
 <style>
+
+.container-content {
+  margin-bottom: 6rem;
+}
 .container-purple {
   height: 280px;
   width: 100%;
   background: linear-gradient(
-    
+
     0deg,
     rgba(219, 104, 153, 1) 0%,
     rgba(77, 90, 152, 0.9864320728291317) 100%
@@ -96,7 +100,7 @@ export default {};
 }
 .container-banner-right h1 {
   color: #253852;
-  
+
 }
 .container-banner-right p b {
   color: #253852;
@@ -116,7 +120,7 @@ export default {};
 }
 .text-banner-left p{
  color: white;
- font-size:62px ; 
+ font-size:62px ;
  line-height: 53px;
  font-family: "NunitoSans-Light",sans-serif;
 
@@ -140,11 +144,11 @@ export default {};
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
-  width:100%; 
+  width:100%;
   height:41rem;
-  
+
   align-items: center;
- 
+
 }
 /* .content-info h1 {
   color: #253852;
@@ -153,8 +157,8 @@ export default {};
 .box-container{
   margin: 30px auto;
   width: 70%;
-  
-  
+
+
 
 }
 .content-title h1{
@@ -163,7 +167,7 @@ export default {};
 
 .container-main .box-letf img{
   width: 100%;
-  
+
 }
 .container-main .box-right img{
   width: 100%;
@@ -173,20 +177,20 @@ export default {};
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 .container-main .description p{
  color: #253852;
  font-size: 24px;
 
-  
+
 }
 
 .descriptiong {
   width:100% ;
   padding: 0;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 
 }
 .description h2{
@@ -223,9 +227,9 @@ export default {};
 }
  .container-main  {
    width: 100%;
- } 
+ }
 }
-  
+
 @media (max-width: 760px){
 .container-purple{
   margin-top: 78px;

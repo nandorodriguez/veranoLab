@@ -24,10 +24,10 @@
                     descuento
                 </h1>
             </div>
-              
+
           </div>
       </div>
-     
+
     </div>
   </main>
 </template>
@@ -93,7 +93,7 @@ export default {};
   display: flex;
   justify-content: center;
   flex-direction:row;
- 
+
 }
 .banner-green .box-off{
   width: 150px;
@@ -120,7 +120,7 @@ export default {};
   align-items: center;
   bottom: -57px;
 
-  
+
 }
 .box-porcentaje .title-box h2:nth-child(1){
   font-size:42px;
@@ -136,7 +136,8 @@ export default {};
 
 .box-porcentaje .box-off .percentage h1{
   font-size: 70px;
-  }
+  line-height: 50px;
+}
 .container-banner {
   position: relative;
   margin: 0;
@@ -146,7 +147,7 @@ export default {};
   position: absolute;
   align-items: center;
   bottom:150px;
-  
+
 }
 .container-box .item-box{
   width: 200px;
@@ -203,13 +204,13 @@ export default {};
   display: flex;
   justify-content: center;
   flex-direction: column;
- 
+
 }
 .box-porcentaje{
   position: inherit;
   flex-direction: column-reverse;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
 
 }
 
@@ -219,8 +220,8 @@ export default {};
   flex-wrap: wrap;
   margin-left: inherit;
   margin-top: 15px;
- 
-  
+
+
 }
 .box-porcentaje .title-box h2:nth-child(1){
   color:white;
@@ -232,8 +233,8 @@ export default {};
 .box-porcentaje .title-box h2:nth-child(2){
   color:white;
    text-align: center;
-  
+
 }
-} 
+}
 
 </style>
