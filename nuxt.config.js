@@ -26,6 +26,21 @@ export default {
     ]
   },
 
+  graphql: {
+    clients: {
+      default: {
+        endpoint: 'https://api-us-west-2.graphcms.com/v2/cl0b8uzbw3cxo01z75q35ajvm/master',
+        options: {
+          headers: {
+            authorization: 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE2NDcyODI2NDEsImF1ZCI6WyJodHRwczovL2FwaS11cy13ZXN0LTIuZ3JhcGhjbXMuY29tL3YyL2NsMGI4dXpidzNjeG8wMXo3NXEzNWFqdm0vbWFzdGVyIiwiaHR0cHM6Ly9tYW5hZ2VtZW50LW5leHQuZ3JhcGhjbXMuY29tIl0sImlzcyI6Imh0dHBzOi8vbWFuYWdlbWVudC5ncmFwaGNtcy5jb20vIiwic3ViIjoiZjcxMzA0MTQtMWUyYy00ZWU2LWJlNDQtNmY5NjA1M2ZlZmJhIiwianRpIjoiY2wwcjFqd2sxMGh5ZzAxejhiZjFlOGR1ZSJ9.xJD_FiKi38RoFKG9LkrThuHw5M6i20xKwr3rjzOlC-Pc0hSKbLuTXpbzqN1zXlBd3g06LoUwD7m56aPIwiiLLdwOdkDjncTVcXx5aRaXAzvk-Q6t9OjjryvIyDvM88rP7Ql_MMfdtLZu_7D6LLe6Yj7O7mrBNBopMbQr9-cZjkHXOVGcZFfEzJl52M7Vw7z7SsIDo8F9dG29JCkl5-LVYLPARROCqOyOL6VesTb8gFhmQ3iriOL5m4uIsG9HACIIxkZvvybyZ35bJi6KXDzNZgYsWAT91F3lS7q6k2uG0J1C9OIBGXXU98D4vg27kRC8XHOSW4eOipacf5Pe3EeMpTuVssLrrsMwFenGzCpDi9ev0WaUPO2UUIgwKlmvJpNK-YnJ3L8eHKxDRJJNHeyU3IVbxr_4EvOH2kQN2GxHgC_tr6YwueckFZMAqsyR6_TbhUdQYRIvf1GQj_TR5YIx9qK0QAmBUdMmCKum1nfK-ac4BDvTa8nIxPv0PGCMhN7CgkXNNAU6J9Js1bKD_YKvStAMYGCYKgBDbJOdLyIXY1M8uMf9sRcT2pus5I37oEF4gqY2eCKDvxVi7vWa_KNqkamIIl2eMWWxBhyb_XKR4nYdwAz0aQ0ZaKOTNl4gR85TC5-dsWvLoo0VaeJAYBq_4Y9PcPQ1mFjOeKbvPg2dOIM',
+          },
+        },
+      },
+    },
+    useFetchPolyfill: true,
+    includeNodeModules: true,
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/css/style.css',
@@ -45,6 +60,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    'nuxt-graphql-request'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

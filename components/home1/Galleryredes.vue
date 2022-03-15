@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: "Banner3",
+  name: "Galleryredes",
 };
 </script>
 
@@ -54,7 +54,7 @@ export default {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  
+
 }
 .gallery{
   width:680px;
@@ -64,13 +64,13 @@ export default {
     height:auto;
     width:170px;
     margin: 0 !important;
-  
+
 }
 
 @media (max-width:340px) {
 .framework {
   width:250px;
-  height:250px;  
+  height:250px;
 }
 .gallery img{
     height:auto;

@@ -2,62 +2,19 @@
   <main class="row register-main mt-md-5">
     <section class="container-main-left col-lg-4 col-md-5 col-sm-8 mr-lg-5 ">
       <div class="section-learn">
-        <span>VAMOS A APRENDER</span>
-        <h1 class="color-dark">¡Aprende a empacar regalos!</h1>
+        <span>{{body.subtituloContenido}}</span>
+        <h1 class="color-dark">{{body.tituloContenido}}</h1>
         <img src="@/assets/img/logobanner.png" alt="mini-logo" />
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur nisi
-          vero molestias natus non quos labore nihil quia repellendus aut atque
-          amet cumque saepe voluptatem, laudantium velit obcaecati. Ut, dolore!
+          {{body.descripcionContenido}}
         </p>
       </div>
       <div class="question-item">
-        <div class="question-one">
-          <h2>1.¿Qué vamos a lograr?</h2>
-
-          <ul>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-              eos sit odit, at repudiandae unde perspiciatis inventore dolorem
-              cumque, distinctio amet esse reiciendis neque libero, modi illo
-              quidem veniam vitae.
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum a
-              assumenda recusandae quod, sint voluptates quis laborum vero animi
-              laboriosam nihil nulla, facilis facere aut totam? Modi tempore
-              ratione eius?
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum a
-              assumenda recusandae quod, sint voluptates quis laborum vero animi
-              laboriosam nihil nulla, facilis facere aut totam? Modi tempore
-              ratione eius?
-            </li>
-          </ul>
-        </div>
-        <div class="question-two">
-          <h2>2.¿Como lo lograremos?</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-            exercitationem optio repellat autem ut amet, quidem quisquam
-            cupiditate officia tenetur mollitia reprehenderit placeat illo, quos
-            minima maxime laborum veritatis quae!
-          </p>
-        </div>
-        <div class="question-three">
-          <h2>3.¿Como voy a acceder?</h2>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda
-            similique animi recusandae perspiciatis magnam harum placeat ut quae
-            eaque explicabo. Reiciendis dignissimos excepturi asperiores impedit
-            nihil ipsam iusto provident consequatur?
-          </p>
-        </div>
+        <span v-if="body.contenidoGeneral" v-html="body.contenidoGeneral"></span>
       </div>
     </section>
     <section class="container-main-right col-lg-4 col-md-4 col-sm-8">
-      <img src="../../assets/img/bannerone.png" alt="" />
+      <img v-if="body.imagenPromocional" :src="body.imagenPromocional.url" alt="" />
       <div class="main-text-container w-100 text-center my-4">
         <h2>Inscríbete al programa</h2>
         <h2>¡Ahora mismo!</h2>
@@ -83,13 +40,13 @@
       </div>
       <div class="main-text-register">
         <div class="banner-yellow">
-          <h2>Inscríbete al programa aquí </h2>
+          <a v-if="body.urlLink" :href="body.urlLink">Inscríbete al programa aquí </a>
         </div>
         <div>
           <p>Cupos vendidos hasta hoy</p>
         </div>
-        <div class="loading-bar"> <div class="load" :style="`width:${porcentaje}%`"></div><span>{{porcentaje}} %</span></div>
-        <div class="final-title"><h2>80 cupos disponibles</h2></div>
+        <div v-if="body.porcentajeCupo" class="loading-bar"> <div class="load" :style="`width:${body.porcentajeCupo}%`"></div><span>{{body.porcentajeCupo}} %</span></div>
+        <div v-if="body.cuposDisponible" class="final-title"><h2>{{body.cuposDisponible}} cupos disponibles</h2></div>
           <p>Si tienes preguntas haz <a href="#">clic aquí</a></p>
       </div>
     </section>
@@ -103,6 +60,9 @@ import tokenContratJSON from "@/util/erc20token.json";
 import moment from "moment";
 let porcentaje
 export default {
+  props: {
+    body: Array
+  },
   data() {
     return {
       actualTime: moment().format("X"),
@@ -306,7 +266,7 @@ export default {
   margin-top: 40px;
   width: 100%;
 }
-.container-main-right .banner-yellow h2{
+.container-main-right .banner-yellow a{
   text-align: center;
   font-size: 20px;
 }

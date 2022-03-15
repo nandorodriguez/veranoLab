@@ -3,23 +3,22 @@
     <div class="container-banner">
       <div class="banner-purple ">
        <div class="row banner-purple-text">
-          <p class="lab col-12 col-sm-3 text-center ">LAB <span>01</span></p>
+          <p class="lab col-12 col-sm-3 text-center ">{{header.titulo}} <span></span></p>
         <p class=" col-12 col-sm-5 text-center">Inscribete ya</p>
+
        </div>
-         <div class="container-box ">
-          <div class="item-box bg-dark"></div>
-          <div class="item-box bg-dark"></div>
-          <div class="item-box bg-dark"></div>
+         <div v-if="header.imagenesSecundarias" class="container-box ">
+           <img class="item-box" v-key="idx" v-for="(img, idx) of header.imagenesSecundarias" :src="img.url" :alt="`${(header.titulo).replace(' ', '-')}-0${idx}`">
         </div>
       </div>
       <div class=" banner-green">
           <div class="box-porcentaje">
             <div class="title-box">
-              <h2>DISPONIBLE HASTA HOY</h2>
-              <h2>Última oportunidad para inscribirse</h2>
+              <h2 class="text-uppercase">{{header.tituloPromicion}}</h2>
+              <h2 class="text-uppercase">{{header.descripcionPromocion}}</h2>
               </div>
             <div class="box-off text-center ">
-                <div class="percentage"><h1>50%</h1></div>
+                <div class="percentage"><h1>{{header.porcentajePromocion}}%</h1></div>
                 <h1>
                     descuento
                 </h1>
@@ -33,7 +32,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    header: Array
+  },
+  data() {
+    return {
+
+    }
+  }
+};
 </script>
 
 <style>
@@ -131,12 +139,19 @@ export default {};
 }
 .box-porcentaje .box-off h1{
   color:#25BC8E;
+}
 
+.box-porcentaje .box-off {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .box-porcentaje .box-off .percentage h1{
   font-size: 70px;
-  line-height: 50px;
+  line-height: 63px;
+  /* background-color: red; */
 }
 .container-banner {
   position: relative;

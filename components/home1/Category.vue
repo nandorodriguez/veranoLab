@@ -25,19 +25,19 @@
       </p>
     </div>
     <div class="box col-lg-11 box col-md-11 d-flex flex-wrap  justify-content-center">
-    <div  class="box-item color  p-4  m-sm-4  m-lg-3 "  :key="idx" v-for="(data, idx) in box" :style="`background:${data.color}`">
-     <p>{{data.title}}</p>
-     <h1>{{data.number}}</h1>
-     <p>{{data.desc}}</p>
-     
-    </div>
+    <a  class="box-item color  p-4  m-sm-4  m-lg-3 "  :key="idx" v-for="(data, idx) in category" :style="`background:${data.colorGradiente}`" :href="`/detalle/${data.id}`">
+      <p>{{data.titulo}}</p>
+      <h1>0{{idx+1}}</h1>
+      <p>{{data.descripcion}}</p>
+    </a>
     </div>
   </div>
 </template>
 
 <script>
+import { gql } from 'nuxt-graphql-request';
 export default {
-  name: "Banner2",
+  name: "Category",
 
   data(){
     return{
@@ -77,15 +77,48 @@ export default {
           desc:"Descriptor de lo que es este laboratorio promueve.",
           color:"linear-gradient(0deg, rgba(114,177,224,1) 0%, rgba(221,114,137,1) 100%)"
          }
-      ]
+      ],
+      category: {}
+
     }
-  }
+  },
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: 'fetchData',
+  },
+  methods: {
+    async fetchData() {
+      this.service = null
+      try {
+        const { categoria } = await this.$graphql.default.request(
+          gql`
+            query Categorias {
+              categoria {
+                id
+                titulo
+                descripcion
+                colorGradiente
+              }
+            }
+          `
+        );
+        this.category= categoria;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  },
 };
 
 
 </script>
 
-<style>
+<style scoped>
+.mbm {
+  margin-top: 78px;
+}
 .container-banner{
     margin: 100px 0;
 }
@@ -94,7 +127,7 @@ export default {
 }
 .box{
     margin: 40px 0;
-  
+
 }
 .item-text{
   color: #777c87;
@@ -118,7 +151,7 @@ export default {
   font-family: 'Roboto-Condensed',sans-serif;
   font-weight: bold;
   font-size: 42px;
-  
+
 }
 .box-item p:nth-child(2){
   font-family: 'Roboto-Condensed',sans-serif;

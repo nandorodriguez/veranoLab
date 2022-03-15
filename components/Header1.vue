@@ -6,18 +6,18 @@
     <!--Main Menu/ Mobile Menu Section-->
     <section class="menu-section-area">
       <!-- Navigation -->
-   
-      <b-navbar     
+
+      <b-navbar
         v-b-scrollspy:list-of-sections
         v-b-scrollspy="20"
         class="bg-light
           navbar navbar-expand-lg
-          d-none d-sm-none d-md-block d-lg-block d-xl-block 
+          d-none d-sm-none d-md-block d-lg-block d-xl-block
         "
         id="mainNav"
-        
+
       >
-      
+
         <div class="d-flex flex-row mx-3 ml-5 w-100">
           <nuxt-link class="navbar-brand js-scroll-trigger" to="/">
             <b-img
@@ -44,20 +44,20 @@
                 >
               </li>
                <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="/contact" target="_self"
+                <a class="nav-link js-scroll-trigger" href="/" target="_self"
                   >PROGRAMAS</a
                 >
               </li>
                <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="/about" target="_self"
+                <a class="nav-link js-scroll-trigger" href="/" target="_self"
                   >SOMOS</a
                 >
               </li>
                <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="/" target="_self"
+                <a class="nav-link js-scroll-trigger" href="/#contacto" target="_self"
                   >CONTACTO</a
                 >
-              </li>  
+              </li>
             </ul>
           </div>
         </div>

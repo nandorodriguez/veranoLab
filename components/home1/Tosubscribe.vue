@@ -1,4 +1,5 @@
-<template>
+<template name="contacto">
+<a class="contacto" name="contacto">
   <div class="d-flex justify-content-center bg-blue parallax">
     <div class="row m-0 d-flex justify-content-center flex-column my-5">
       <h2 class="text-center title mb-4">Contactanos en:</h2>
@@ -19,6 +20,7 @@
      </b-form>
   </div>
   </div>
+  </a>
 </template>
 
 <script>
@@ -55,6 +57,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    cursor:pointer;
   }
   .title {
    color: #F07533;
@@ -85,7 +88,7 @@
     border-color: #F07533;
     color: white;
   }
-  
+
   .designForm {
     display: block;
     padding: 10px;
