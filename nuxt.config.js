@@ -2,6 +2,7 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  ssr: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -68,6 +69,12 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
   ],
+  static: {
+    prefix: false
+  },
+  generate: {
+    fallback: true
+  },
   router: {
     extendRoutes(routes, resolve) {
       routes.push({

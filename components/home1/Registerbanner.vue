@@ -10,7 +10,7 @@
         </p>
       </div>
       <div class="question-item">
-        <span v-if="body.contenidoGeneral" v-html="body.contenidoGeneral"></span>
+        <div v-if="body.contenidoGeneral" v-html="body.contenidoGeneral"></div>
       </div>
     </section>
     <section class="container-main-right col-lg-4 col-md-4 col-sm-8">
@@ -194,14 +194,35 @@ export default {
   font-weight: 500;
   font-style: italic;
 }
-.question-one ul li {
+.question ul li {
   list-style: circle;
   margin: 0 0 0 15px;
   color:#949598;
   font-family:Roboto-Condensed,roboto;
   font-size: 16px;
-
 }
+.question h2 {
+  border-top: 1.5px solid #282623;
+  border-bottom: 1.5px solid #282623;
+  color: #F6A838;
+  font-family: Roboto-Condensed,roboto;
+  text-transform: uppercase;
+}
+.question h3 {
+  color: #F6A838 !important;
+  font-family: Roboto-Condensed,roboto;
+  font-size: 20px;
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+.question h4 {
+  color: #F6A838 !important;
+  font-family: Roboto-Condensed,roboto;
+  font-size: 18px;
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+
 /* container right*/
 
 .container-main-right {

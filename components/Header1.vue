@@ -44,7 +44,7 @@
                 >
               </li>
                <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="/" target="_self"
+                <a class="nav-link js-scroll-trigger" href="/#programas" target="_self"
                   >PROGRAMAS</a
                 >
               </li>
