@@ -3,31 +3,59 @@
     <div class="banner-orange d-flex justify-content-center align-items-center m-0">
       <p>Ingresa y síguenos en nuestras redes @verano.lab</p>
     </div>
-    <div class="folliwing justify-content-xl-around m-0">
-      <div class="framework d-flex justify-content-center ">
-           <!-- <img src="@/assets/img/1x/image1.png" alt="" /> -->
+    <div v-if="imagenes" class="row m-0">
+      <div v-if="imagenMain" class="col-sm-12 col-md-5 m-0 image-main" :style="`backgroundImage: url(${imagenMain})`">
       </div>
-      <div class="gallery d-flex flex-wrap justify-content-center m-0 p-0">
-        <img src="@/assets/img/1x/image1.png" alt="" />
-        <img src="@/assets/img/1x/image2.png" alt="" />
-        <img src="@/assets/img/1x/image3.png" alt="" />
-        <img src="@/assets/img/1x/image4.png" alt="" />
-        <img src="@/assets/img/1x/image5.png" alt="" />
-        <img src="@/assets/img/1x/image7.png" alt="" />
-        <img src="@/assets/img/1x/image8.png" alt="" />
-        <img src="@/assets/img/1x/image9.png" alt="" />
+      <div class="col-sm-6 col-md-7 p-0">
+        <div class="row m-0">
+          <div :key="idx" v-for="(imagen,idx) in imagenes.imagenesProducto" v-if="idx <=7" class="col-sm-12 col-md-3 p-0 image-secundary" :style="`backgroundImage: url(${imagen.url})`"></div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { gql } from "nuxt-graphql-request";
 export default {
   name: "Galleryredes",
+  data(){
+    return {
+      imagenes: {},
+      imagenMain: ''
+    }
+  },
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData"
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const { imagenesRed } = await this.$graphql.default.request(
+          gql`
+            query Categorias {
+              imagenesRed {
+                imagenesProducto {
+                  url
+                }
+              }
+            }
+          `
+        );
+        this.imagenes = imagenesRed[0];
+        this.imagenMain= imagenesRed[0].imagenesProducto[0].url;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
 };
 </script>
 
-<style>
+<style scoped>
 
 .banner-orange {
   background-color: rgb(255, 136, 0);
@@ -58,6 +86,22 @@ export default {
 }
 .gallery{
   width:680px;
+}
+
+.image-main {
+  width: 100%;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+}
+
+.image-secundary {
+  width: 100%;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
 }
 
 .gallery img{

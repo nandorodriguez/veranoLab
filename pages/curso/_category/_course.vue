@@ -109,11 +109,10 @@ export default {
             }
           `
         );
-        console.log(categoria);
         this.category = categoria;
         this.searchCategory();
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       }
     },
     searchCategory() {
@@ -129,7 +128,6 @@ export default {
           // this.curso.cursosDisponibles.contenidoGeneral.text = this.curso.cursosDisponibles.contenidoGeneral.text.replace('\n', '');
           let datos = this.curso.contenidoGeneral.text.replace(/\n/g, ' ')
           this.curso.cursosDisponibles.contenidoGeneral.text = datos;
-          console.log('>>>>>>>>>>>>>>>>>>>><',datos);
         } else {
           this.$router.push("/");
         }

@@ -54,11 +54,7 @@
 </template>
 
 <script>
-import Web3 from "web3";
-import saleContratJSON from "@/util/tokensale.json";
-import tokenContratJSON from "@/util/erc20token.json";
 import moment from "moment";
-let porcentaje
 export default {
   props: {
     body: Array
@@ -75,29 +71,12 @@ export default {
       porcentaje:50
     };
   },
+  computed:{
+    getDate(){
+      return this.body.tiempoPromocional;
+    }
+  },
   methods: {
-    async getWeb3() {
-      if (window.provider == null) {
-        this.messageButton = "Connect Wallet";
-        this.messageButtonT = "Connect Wallet";
-      } else {
-        this.messageButton = "Swap MATIC";
-        this.messageButtonT = "Swap USDC";
-        window.saleContract = new window.$web3.eth.Contract(
-          saleContratJSON,
-          "0xC79778e6C127c7fe31aE870A019F484a82B532F7"
-        );
-        window.javaContract = new window.$web3.eth.Contract(
-          tokenContratJSON,
-          "0x4aFaE971Ac146d4028c3Ed581Eb307A1615E59Fe"
-        );
-        window.usdcContract = new window.$web3.eth.Contract(
-          tokenContratJSON,
-          "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
-        );
-        window.address = await $web3.eth.getAccounts();
-      }
-    },
     addOneSecondToActualTimeEverySecond() {
       var component = this;
       component.actualTime = moment().format("X");
@@ -106,10 +85,13 @@ export default {
       }, 1000);
     },
     getDiffInSeconds() {
+      
       return moment("2022-03-5 19:00:00").format("X") - this.actualTime;
     },
     compute() {
-      var duration = moment.duration(this.getDiffInSeconds(), "seconds");
+      document.cookie = `limit=${this.getDate}`;
+      this.dateLimit = moment
+      let  duration = moment.duration(this.getDiffInSeconds(), "seconds");
       this.years = duration.years() > 0 ? duration.years() : 0;
       this.months = duration.months() > 0 ? duration.months() : 0;
       this.days = duration.days() > 0 ? duration.days() : 0;
@@ -128,12 +110,8 @@ export default {
     },
   },
   mounted() {
-    setTimeout(() => {
-      this.getWeb3();
-    }, 2000);
-    // console.log("moment", moment().format("X"));
-  },
-
+    console.log('esta es la data: ', this.getDate);
+  }
 };
 </script>
 
