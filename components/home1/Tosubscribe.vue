@@ -1,4 +1,5 @@
 <template name="contacto">
+<client-only>
 <a class="contacto" name="contacto">
   <div class="d-flex justify-content-center bg-blue parallax">
     <div class="row m-0 d-flex justify-content-center flex-column my-5">
@@ -21,6 +22,7 @@
   </div>
   </div>
   </a>
+</client-only>
 </template>
 
 <script>

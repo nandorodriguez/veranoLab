@@ -1,7 +1,8 @@
 import Category from '@/components/home1/Category.vue';
 <template>
+<client-only>
   <main v-if="category">
-    <div class="container-purple d-flex flex-wrap">
+    <div class="container-purple d-flex flex-wrap justify-content-sm-center justify-content-md-between  align-items-center align-content-center">
       <div class="text-banner-left">
         <p>{{ category.titulo }} <br /><b>01</b></p>
       </div>
@@ -22,7 +23,7 @@ import Category from '@/components/home1/Category.vue';
         <p class="container-banner-right-desc">
           {{ category.descripcionContenido }}
         </p>
-        <p v-key="idx" v-for="(lista, idx) of category.listaContenido">
+        <p :key="idx" v-for="(lista, idx) of category.listaContenido">
           <b>{{ idx + 1 }}. </b>{{ lista }}
         </p>
       </div>
@@ -44,9 +45,9 @@ import Category from '@/components/home1/Category.vue';
           </div>
         </div>
         <div class="container-main">
-            <div class="row">
+            <div class="row pb-5">
               <div class="col-sm-12 col-md-6 p-0">
-                <div v-key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" v-if="idx < secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
+                <div :key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" v-if="idx < secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
                   <img :src="curso.imagePrincipal.url" alt="banner" />
                   <div class="description" :style="`backgroundColor: ${curso.color}`">
                     <p>0{{ idx + 1 }}. {{ curso.titulo }}</p>
@@ -54,7 +55,7 @@ import Category from '@/components/home1/Category.vue';
                 </div>
               </div>
               <div class="col-sm-12 col-md-6 px-0" :class="(secuencia % 2 != 0)? 'mbm': ''">
-                <div v-key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" v-if="idx>= secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
+                <div :key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" v-if="idx>= secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
                   <img :src="curso.imagePrincipal.url" alt="banner" />
                   <div class="description" :style="`backgroundColor: ${curso.color}`">
                     <p>0{{ idx + 1 }}. {{ curso.titulo }}</p>
@@ -66,6 +67,7 @@ import Category from '@/components/home1/Category.vue';
       </div>
     </div>
   </main>
+</client-only>
 </template>
 
 <script scoped>
@@ -164,6 +166,7 @@ export default {
   );
   justify-content: space-around;
   align-items: center;
+  padding: 0 15vw;
 }
 .container-banner-right h1 {
   color: #253852;
@@ -283,6 +286,18 @@ export default {
 @media (max-width: 760px) {
   .container-purple {
     margin-top: 78px;
+  }
+  .text-banner-right p {
+    font-size: 50px;
+  }
+
+  .text-banner-left p {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .text-banner-left p b {
+    font-size: 44px;
   }
 }
 </style>

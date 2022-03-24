@@ -1,5 +1,6 @@
 <template>
-  <div class="">
+<client-only>
+  <div>
     <header id="home" class="position-relative ">
       <div v-if="slider">
         <Loading v-if="loading"/>
@@ -32,7 +33,7 @@
       <p class="text-center">¿Que somos y ofrecemos?</p>
     </div>
   </div>
- 
+</client-only>
 </template>
 
 <script>

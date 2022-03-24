@@ -1,4 +1,5 @@
 <template >
+<client-only>
 <div>
   <a class="programas" name="programas">
     <div class="row container-banner d-flex justify-content-center mt-5">
@@ -36,6 +37,7 @@
   </div>
   </a>
 </div>
+</client-only>
 </template>
 
 <script>

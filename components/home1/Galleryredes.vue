@@ -1,4 +1,5 @@
 <template>
+<client-only>
   <div class="m-0">
     <div class="banner-orange d-flex justify-content-center align-items-center m-0">
       <p>Ingresa y síguenos en nuestras redes @verano.lab</p>
@@ -13,6 +14,7 @@
       </div>
     </div>
   </div>
+</client-only>
 </template>
 
 <script>
