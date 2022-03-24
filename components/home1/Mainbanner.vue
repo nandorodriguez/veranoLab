@@ -43,20 +43,18 @@ import Category from '@/components/home1/Category.vue';
             </p>
           </div>
         </div>
-        <div class="container-main">
+        <div class="container-main mb-5">
             <div class="row">
               <div class="col-sm-12 col-md-6 p-0">
-                <div v-key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" v-if="idx < secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
-                  <img :src="curso.imagePrincipal.url" alt="banner" />
-                  <div class="description" :style="`backgroundColor: ${curso.color}`">
+                <div v-key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" :style="`backgroundImage: url(${curso.imagePrincipal.url})`" v-if="idx < secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
+                  <div class="description position-absolute fixed-bottom" :style="`backgroundColor: ${curso.color}`">
                     <p>0{{ idx + 1 }}. {{ curso.titulo }}</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6 px-0" :class="(secuencia % 2 != 0)? 'mbm': ''">
-                <div v-key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" v-if="idx>= secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
-                  <img :src="curso.imagePrincipal.url" alt="banner" />
-                  <div class="description" :style="`backgroundColor: ${curso.color}`">
+                <div v-key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" :style="`backgroundImage: url(${curso.imagePrincipal.url})`" v-if="idx>= secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
+                  <div class="description position-absolute fixed-bottom" :style="`backgroundColor: ${curso.color}`">
                     <p>0{{ idx + 1 }}. {{ curso.titulo }}</p>
                   </div>
                 </div>
@@ -229,7 +227,11 @@ export default {
 .box {
   min-width: 100%;
   width: 100%;
-  height: auto;
+  height: 450px;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
   margin: 0;
 }
 
@@ -239,6 +241,8 @@ export default {
 
 .container-main .box img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .content-title h1 {
   color: #253852;
