@@ -1,30 +1,30 @@
 <template>
-  <div class="">
+<client-only>
+  <div>
     <header id="home" class="position-relative ">
-
-      <div v-if="imgs">
-        <div v-if=" imgs[index]" class="row mx-0 d-flex justify-content-center flex-row home-banner" :style="`background-image: url('${imgs[index].image}');`">
+      <div v-if="slider">
+        <Loading v-if="loading"/>
+        <div v-if="slider[index]" class="row mx-0 d-flex justify-content-center flex-row home-banner" :style="`background-image: url('${slider[index].imagenSlider.url}');`">
           <div class="col-md-10">
             <div class="container hg">
               <div class="hero-area-wrapper d-flex flex-row wow fadeInLeft">
                 <div class="hero-area-content text-break">
                   <div class="hero-area-content-img"></div>
-                  <p class="title text-center " data-aos="fade-right">{{ imgs[index].title }}</p>
+                  <p class="title text-center " data-aos="fade-right"></p>
                   <br>
-                  <p class="desc text-center" data-aos="fade-right">{{ imgs[index].desc }}</p>
+                  <p class="desc text-center" data-aos="fade-right">{{ slider[index].descripcionSlider }}</p>
                   <br>
                   <div class="hero-button-box py-2 py-md-5">
-                    <span href="#" class="theme-btn" data-aos="fade-right">{{ imgs[index].textbtn }}</span>
+                    <span href="#" class="theme-btn" data-aos="fade-right">{{ slider[index].textoBoton }}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-         
         </div>
       </div>
       <div class="circle">
-        <span class="px-1" :key="idx" v-for="(i ,idx) in imgs">
+        <span class="px-1" :key="idx" v-for="(i ,idx) in slider">
         <i :class="`fas fa-circle ${ idx == index ? 'active-color': ''}`"  @click.stop="changeSlider(idx)"></i>
         </span>
       </div>
@@ -33,69 +33,53 @@
       <p class="text-center">¿Que somos y ofrecemos?</p>
     </div>
   </div>
- 
+</client-only>
 </template>
 
 <script>
+import { gql } from "nuxt-graphql-request";
 export default {
   name: "Banner1",
   data() {
     return {
+      loading: false,
+      slider: {},
       index: 0,
       vol:0,
-      imgs: [
-        {
-          title: "Todo un estilo de vida",
-          subtitle: "LIFEBREAK BY IMUKO",
-          desc: 'Un espacio rural de trabajo cerca a Guatapé en el que conectarás contigo y con el mundo a través de una experiencia multicultural de Inmersión Lingüística.',
-          textbtn: "Schedule My Tour",
-          urlbtn: "#",
-          image:require('@/assets/img/bannerone.png')
-        },
-        {
-          title: "Todo un estilo de vida",
-          subtitle: "..................",
-          desc: 'Un espacio rural de trabajo cerca a Guatapé en el que conectarás contigo y con el mundo a través de una experiencia multicultural de Inmersión Lingüística',
-          textbtn: "Schedule My Tour",
-          urlbtn: "#",
-           image:require('@/assets/img/bannerone.png')        },
-        {
-          title: "Todo un estilo de vida",
-          subtitle: "..................",
-          desc: 'Un espacio rural de trabajo cerca a Guatapé en el que conectarás contigo y con el mundo a través de una experiencia multicultural de Inmersión Lingüística.',
-          textbtn: "Schedule My Tour",
-          urlbtn: "#",
-           image:require('@/assets/img/bannerone.png') 
-        },
-        {
-          title: "Todo un estilo de vida",
-          subtitle: "..................",
-          desc: 'Un espacio rural de trabajo cerca a Guatapé en el que conectarás contigo y con el mundo a través de una experiencia multicultural de Inmersión Lingüística.',
-          textbtn: "Schedule My Tour",
-          urlbtn: "#",
-           image:require('@/assets/img/bannerone.png')
-        },
-
-        {
-          title: "Todo un estilo de vida",
-          subtitle: "..................",
-          desc: 'Un espacio rural de trabajo cerca a Guatapé en el que conectarás contigo y con el mundo a través de una experiencia multicultural de Inmersión Lingüística.',
-          textbtn: "Schedule My Tour",
-          urlbtn: "#",
-           image:require('@/assets/img/bannerone.png')
-        },
-        {
-          title: "Todo un estilo de vida",
-          subtitle: "..................",
-          desc: 'Un espacio rural de trabajo cerca a Guatapé en el que conectarás contigo y con el mundo a través de una experiencia multicultural de Inmersión Lingüística.',
-          textbtn: "Schedule My Tour",
-          urlbtn: "#",
-          image:require('@/assets/img/bannerone.png')
-        }
-      ]
     };
   },
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData"
+  },
   methods: {
+    async fetchData() {
+      this.loading = true;
+      try {
+        const {slider} = await this.$graphql.default.request(
+          gql`
+            query Categorias {
+              slider {
+                id
+                textoBoton
+                urlBoton
+                imagenSlider {
+                  url
+                }
+                descripcionSlider
+              }
+            }
+          `
+        );
+        this.slider = slider;
+        this.loading = false;
+      } catch (e) {
+        console.log(e);
+        this.loading= false;
+      }
+    },
     changeSlider(id) {
       this.index = id;
     },
@@ -104,13 +88,13 @@ export default {
         this.index -= 1;
       }
       else{
-        this.index = this.imgs.length;
+        this.index = this.slider.length;
         this.index -= 1;
       }
 
     },
     next() {
-      if (this.index === this.imgs.length-1) {
+      if (this.index === this.slider.length-1) {
         this.index = 0;
       }
       else{
@@ -140,7 +124,7 @@ export default {
   },
   mounted() {
     this.intervalTime();
-    this.vol = this.imgs.length;
+    this.vol = this.slider.length;
     window.addEventListener("keydown", this.onKeydown);
   },
   destroyed() {
@@ -284,8 +268,20 @@ background-image: url("@/assets/img/1x/verano.png");
 }
 
 .circle {
-  display: none;
+  display: block;
+  position: absolute;
+  width: 100%;
+  bottom: 1rem;
+  text-align: center;
 }
+.circle span  i {
+  color: #fff;
+}
+
+.active-color {
+  color: #CA3381 !important;
+}
+
 .banner-yellow{
   background-color: #F6A838;
   height: 150px;
@@ -325,21 +321,6 @@ background-image: url("@/assets/img/1x/verano.png");
   .hg {
     min-height: 680px;
     max-height: 800px;
-  }
-
-  .circle {
-    display: block;
-    position: absolute;
-    width: 100%;
-    bottom: 1rem;
-    text-align: center;
-  }
-  .circle span  i {
-    color: #fff;
-  }
-
-  .active-color {
-    color: #CA3381 !important;
   }
 
   .arrows-g {

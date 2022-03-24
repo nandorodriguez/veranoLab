@@ -1,14 +1,13 @@
 <template>
+<client-only>
   <main class="Register-main">
     <div class="container-banner">
       <div class="banner-purple ">
        <div class="row banner-purple-text">
-          <p class="lab col-12 col-sm-3 text-center ">{{header.titulo}} <span></span></p>
-        <p class=" col-12 col-sm-5 text-center">Inscribete ya</p>
-
+          <p class="lab col-md-6 col-sm-12 text-center ">{{header.titulo}} <span></span></p>
        </div>
          <div v-if="header.imagenesSecundarias" class="container-box ">
-           <img class="item-box" v-key="idx" v-for="(img, idx) of header.imagenesSecundarias" :src="img.url" :alt="`${(header.titulo).replace(' ', '-')}-0${idx}`">
+           <img class="item-box" key="idx" v-for="(img, idx) of header.imagenesSecundarias" :src="img.url" :alt="`${(header.titulo).replace(' ', '-')}-0${idx}`" v-if="idx<3">
         </div>
       </div>
       <div class=" banner-green">
@@ -29,13 +28,12 @@
 
     </div>
   </main>
+</client-only>
 </template>
 
 <script>
 export default {
-  props: {
-    header: Array
-  },
+  props: ['header'],
   data() {
     return {
 
@@ -51,9 +49,11 @@ export default {
     rgba(219, 104, 153, 1) 0%,
     rgba(77, 90, 152, 0.9864320728291317) 100%
   );
-  height: 280px;
+  height: 380px;
   display: flex;
- justify-content: center;
+  justify-content: center;
+align-items: center;
+align-content: flex-start;
 }
 
 .banner-purple .banner-purple-text{
@@ -63,7 +63,7 @@ export default {
   justify-content:center !important;
   width: 100%;
   height: 200px;
-  margin-top: 20px;
+  margin-top: 40px;
   line-height: inherit;
 }
 .banner-purple-text p:nth-child(1){
@@ -83,6 +83,7 @@ export default {
    font-size: 50px;
    flex-direction: column;
    line-height: inherit;
+   text-transform: uppercase;
 }
 .banner-purple-text .lab span{
    font-size: 50px;
@@ -209,7 +210,7 @@ export default {
   height: inherit;
   }
 .banner-purple .banner-purple-text{
-  margin-top: 80px;
+  margin-top: 30vw;
 }
 .banner-purple-text h1{
   flex-wrap:wrap ;

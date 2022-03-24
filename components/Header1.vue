@@ -80,7 +80,7 @@
             ><b-img
               :src="require('../assets/img/logo.png')"
               img-alt="RATH Logo"
-              class="ml-4 ml-sm-4 ml-md-0 mobile-logo"
+              class="ml-4 ml-sm-4 ml-md-0 mobile-logo my-2"
             ></b-img
           ></b-navbar-brand>
 
@@ -94,24 +94,10 @@
           <b-collapse id="nav-collapse" is-nav>
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
-              <b-nav-item href="#about">INICIO</b-nav-item>
-              <b-nav-item-dropdown
-                to="#"
-                text="PROGRAMA INGLES"
-                no-caret
-                class="fas fa-angle-down"
-              >
-              </b-nav-item-dropdown>
-              <b-nav-item-dropdown
-                to="#"
-                text="QUE OFRECEMOS"
-                no-caret
-                class="fas fa-angle-down"
-              >
-              </b-nav-item-dropdown>
-              <b-nav-item href="#screenshots">QUIENES SOMOS</b-nav-item>
-              <b-nav-item href="#features">BLOG</b-nav-item>
-              <b-nav-item href="#reviews">CONTÁCTENOS</b-nav-item>
+              <b-nav-item href="/">Inicio</b-nav-item>
+              <b-nav-item href="/#programas">Cursos</b-nav-item>
+              <b-nav-item href="/">Somos</b-nav-item>
+              <b-nav-item href="/#contacto">Contacto</b-nav-item>
             </b-navbar-nav>
           </b-collapse>
         </b-container>
@@ -180,15 +166,12 @@ export default {
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
-#mainNavMobile .navbar-nav li.nav-item:hover,
-#mainNavMobile .navbar-nav li.nav-item.active {
-  background-color: #2ca6ef;
-}
+
 #mainNavMobile .navbar-nav li:last-child:hover {
   background-color: transparent;
 }
 #mainNavMobile .navbar-nav .nav-link {
-  color: #fff;
+  color: #2c303a;
   padding: 16px 15px 18px;
   line-height: 15px;
 }
@@ -221,10 +204,6 @@ ul.dropdown-menu .dropdown-item {
 #mainNavMobile .dropdown-item:focus {
   color: #fff;
   background-color: transparent;
-}
-#mainNavMobile .navbar-nav li.nav-item:hover,
-#mainNavMobile .navbar-nav li.nav-item.active {
-  background-color: #2c303a;
 }
 
 .navbar {

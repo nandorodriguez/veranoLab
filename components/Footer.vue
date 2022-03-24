@@ -1,4 +1,5 @@
 <template>
+<client-only>
   <div>
     <!-- Footer Start -->
     <footer class="copyrightarea">
@@ -8,10 +9,10 @@
             </div>
             <div class="row m-0 d-flex justify-content-center align-items-center">
                 <ul class="d-flex py-4 px-3 mx-3 flex-wrap justify-content-center">
-                    <li><a class="item-footer  px-3 mb-5" href="">INICIO</a></li>
-                    <li><a class="item-footer  px-3 mb-5" href="">CURSOS</a></li>
+                    <li><a class="item-footer  px-3 mb-5" href="/">INICIO</a></li>
+                    <li><a class="item-footer  px-3 mb-5" href="/#programas">CURSOS</a></li>
                     <li><a class="item-footer  px-3 mb-5" href="">SOMOS</a></li>
-                    <li><a class="item-footer  px-3 mb-5" href="">CONTACTO</a></li>
+                    <li><a class="item-footer  px-3 mb-5" href="/#contacto">CONTACTO</a></li>
                 
                 </ul>
             </div>
@@ -22,13 +23,13 @@
                 <div class="col-md-2">
                     <div class="row f d-flex flex-nowrap justify-content-center align-items-center align-content-center">
                         <div class="col-2 text-center">
-                            <a target="blank" href="https://instagram.com/lifebreak_guatape?utm_medium=copy_link"><i class="fab fa-instagram"></i></a>
+                            <a target="blank" href="https://www.instagram.com/verano.lab/"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="col-2 text-center">
-                            <a target="blank" href="https://www.facebook.com/Lifebreak_Guatape-100609869056515"><i class="fab fa-facebook"></i></a>
+                            <a target="blank" href="https://web.facebook.com/Verano-Lab-691355358386266"><i class="fab fa-facebook"></i></a>
                         </div>
                         <div class="col-2 text-center">
-                            <a target="blank" href="#"><i class="fab fa-youtube"></i></a>
+                            <a target="blank" href="https://www.youtube.com/channel/UCsAhEhDboJiBqF7MiJTkrtg"><i class="fab fa-youtube"></i></a>
                         </div>
 
                     </div>
@@ -44,6 +45,7 @@
     </footer>
     <!-- Footer End -->
   </div>
+</client-only>
 </template>
 
 <script>

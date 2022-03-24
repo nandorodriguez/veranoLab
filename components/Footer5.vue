@@ -1,4 +1,5 @@
 <template>
+<client-only>
   <div>
     <!-- Footer Start -->
     <footer class="copyright-area">
@@ -28,6 +29,7 @@
     </footer>
     <!-- Footer End -->
   </div>
+</client-only>
 </template>
 
 <script>

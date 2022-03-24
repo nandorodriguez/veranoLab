@@ -1,6 +1,7 @@
 <template>
+<client-only>
   <main class="row register-main mt-md-5">
-    <section class="container-main-left col-lg-4 col-md-5 col-sm-8 mr-lg-5 ">
+    <section class="container-main-left col-lg-4 col-md-5 col-sm-12 mr-lg-5 ">
       <div class="section-learn">
         <span>{{body.subtituloContenido}}</span>
         <h1 class="color-dark">{{body.tituloContenido}}</h1>
@@ -13,7 +14,7 @@
         <div v-if="body.contenidoGeneral" v-html="body.contenidoGeneral"></div>
       </div>
     </section>
-    <section class="container-main-right col-lg-4 col-md-4 col-sm-8">
+    <section class="container-main-right col-lg-4 col-md-4 col-sm-12">
       <img v-if="body.imagenPromocional" :src="body.imagenPromocional.url" alt="" />
       <div class="main-text-container w-100 text-center my-4">
         <h2>Inscríbete al programa</h2>
@@ -23,19 +24,19 @@
       <div class="content-number">
         <div class="data-number">
           <span>{{ days }}</span>
-          <span>Days</span>
+          <span>Dias</span>
         </div>
         <div class="data-number">
           <span>{{ hours }}</span>
-          <span>Hours</span>
+          <span>Horas</span>
         </div>
         <div class="data-number">
           <span>{{ minutes }}</span>
-          <span>Minutes</span>
+          <span>Minutos</span>
         </div>
         <div class="data-number">
           <span>{{ seconds }}</span>
-          <span>seconds</span>
+          <span>Segundos</span>
         </div>
       </div>
       <div class="main-text-register">
@@ -49,73 +50,106 @@
         <div v-if="body.cuposDisponible" class="final-title"><h2>{{body.cuposDisponible}} cupos disponibles</h2></div>
           <p>Si tienes preguntas haz <a href="#">clic aquí</a></p>
       </div>
+      <div v-if="body.imagenesExtras" class="row mx-0 pt-4">
+        <img class="img-fluid"  :key="idx" v-for="(image, idx) in body.imagenesExtras" :src="image.url" :alt="image.fileName" />
+      </div>
     </section>
+    <Testimonial/>
   </main>
+</client-only>
 </template>
 
 <script>
-import Web3 from "web3";
-import saleContratJSON from "@/util/tokensale.json";
-import tokenContratJSON from "@/util/erc20token.json";
 import moment from "moment";
-let porcentaje
+import { gql } from "nuxt-graphql-request";
+import Testimonial from "../../components/home1/Testimonial.vue"
 export default {
-  props: {
-    body: Array
+  props:[ 'body' ],
+  components: {
+    Testimonial
   },
   data() {
     return {
       actualTime: moment().format("X"),
+      dateLimit: '',
+      dateUpdate:'',
+      cont: 1,
       years: 0,
       months: 0,
       days: 0,
       hours: 0,
       minutes: 0,
       seconds: 0,
-      porcentaje:50
     };
   },
+  computed:{
+    getDate(){
+      return this.body.tiempoPromocional
+    },
+    getDays() {
+      return this.body.incrementoDias;
+    }
+  },
   methods: {
-    async getWeb3() {
-      if (window.provider == null) {
-        this.messageButton = "Connect Wallet";
-        this.messageButtonT = "Connect Wallet";
-      } else {
-        this.messageButton = "Swap MATIC";
-        this.messageButtonT = "Swap USDC";
-        window.saleContract = new window.$web3.eth.Contract(
-          saleContratJSON,
-          "0xC79778e6C127c7fe31aE870A019F484a82B532F7"
-        );
-        window.javaContract = new window.$web3.eth.Contract(
-          tokenContratJSON,
-          "0x4aFaE971Ac146d4028c3Ed581Eb307A1615E59Fe"
-        );
-        window.usdcContract = new window.$web3.eth.Contract(
-          tokenContratJSON,
-          "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
-        );
-        window.address = await $web3.eth.getAccounts();
+    async fetchData() {
+      const query = gql`
+          mutation TiempoPromocion {
+            updateCursos(
+              data: {tiempoPromocional: "${this.dateUpdate}"}
+              where: {id: "${this.$route.params.course}"}
+            ) {
+              id
+              tiempoPromocional
+            }
+          }
+      `;
+
+      try {
+        const data = await this.$graphql.default.request(query);
+        console.log(JSON.stringify(data, undefined, 2));
+      } catch (e) {
+        console.error(JSON.stringify(e, undefined, 2));
       }
     },
     addOneSecondToActualTimeEverySecond() {
-      var component = this;
+      let component = this;
       component.actualTime = moment().format("X");
-      setTimeout(function () {
+      setTimeout(()=>{
         component.addOneSecondToActualTimeEverySecond();
       }, 1000);
     },
     getDiffInSeconds() {
-      return moment("2022-03-5 19:00:00").format("X") - this.actualTime;
+      console.log('Esta es la fecha DB', this.getDate);
+      return moment(this.getDate).format("X") - this.actualTime;
     },
     compute() {
-      var duration = moment.duration(this.getDiffInSeconds(), "seconds");
+      let  duration = moment.duration(this.getDiffInSeconds(), "seconds");
+
       this.years = duration.years() > 0 ? duration.years() : 0;
       this.months = duration.months() > 0 ? duration.months() : 0;
-      this.days = duration.days() > 0 ? duration.days() : 0;
+      this.days = duration.days()> 0 ? duration.days() : 0;
       this.hours = duration.hours() > 0 ? duration.hours() : 0;
       this.minutes = duration.minutes() > 0 ? duration.minutes() : 0;
       this.seconds = duration.seconds() > 0 ? duration.seconds() : 0;
+
+      if (duration.days() <= 0 && duration.hours() <= 0 && duration.minutes() <= 1 && duration.seconds() <= 0) {
+        console.log('los dias son:', duration.days());
+        
+        console.log("esta es la fecha a actualizar: ", this.dateUpdate);
+        this.cont = this.cont +1;
+
+        if (this.cont == 30) {
+          let dateUpdate = moment().add(this.getDays, 'days')._d;
+          dateUpdate = moment(dateUpdate).format();
+          this.dateUpdate = dateUpdate;
+          this.fetchData();
+          localStorage.setItem('format-date', this.dateUpdate)
+          console.log("entro a contar ojo....", this.cont);
+          setTimeout(()=>{
+            window.location.reload();
+          }, 10000)
+        }
+      } 
     },
   },
   created() {
@@ -123,17 +157,11 @@ export default {
     this.addOneSecondToActualTimeEverySecond();
   },
   watch: {
+    $route: "fetchData",
     actualTime(val, oldVal) {
       this.compute();
     },
   },
-  mounted() {
-    setTimeout(() => {
-      this.getWeb3();
-    }, 2000);
-    // console.log("moment", moment().format("X"));
-  },
-
 };
 </script>
 
@@ -164,7 +192,7 @@ export default {
 
 .container-main-left .section-learn img {
   width: 40px;
-  padding: 10px 0;
+  padding: 30px 0;
 }
 .question-item {
   text-align: justify;
@@ -254,7 +282,6 @@ export default {
   font-family: "Montserrat Bold", sans-serif;
   font-size: 8.6vw;
   color: #ffbc00;
-
 }
 
 .data-number span:nth-child(2) {
@@ -336,7 +363,7 @@ display: flex;
 }
 @media (min-width: 768px){
 .data-number span:nth-child(1) {
-  font-size: 3.6vw;
+  font-size: 2.6vw;
 }
 .content-number {
   padding: 2vw 15vw;
