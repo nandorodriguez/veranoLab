@@ -1,256 +1,114 @@
 <template>
 <client-only>
-  <main class="Register-main">
-    <div class="container-banner">
-      <div class="banner-purple ">
-       <div class="row banner-purple-text">
-          <p class="lab col-md-6 col-sm-12 text-center ">{{header.titulo}} <span></span></p>
-       </div>
-         <div v-if="header.imagenesSecundarias" class="container-box ">
-           <img class="item-box" key="idx" v-for="(img, idx) of header.imagenesSecundarias" :src="img.url" :alt="`${(header.titulo).replace(' ', '-')}-0${idx}`" v-if="idx<3">
+  <main>
+      <hooper :itemsToShow="1" :centerMode="true" :progress="true" :autoPlay="true" :playSpeed="5000" :hoverPause="true" :infiniteScroll="true" :wheelControl="false" :transition="300">
+        <slide :key="idx" v-for="(img, idx) of header.imagenesSecundarias" class="course-slider" :style="`backgroundImage: url(${img.url})`" >
+
+        </slide>
+      </hooper>
+      <div class="row py-5 justify-content-center m-0 course-main">
+        <div class="col-md-8">
+          <h1 class="text-uppercase course-title">{{header.titulo}}</h1>
         </div>
       </div>
-      <div class=" banner-green">
-          <div class="box-porcentaje">
-            <div class="title-box">
-              <h2 class="text-uppercase">{{header.tituloPromicion}}</h2>
-              <h2 class="text-uppercase">{{header.descripcionPromocion}}</h2>
-              </div>
-            <div class="box-off text-center ">
-                <div class="percentage"><h1>{{header.porcentajePromocion}}%</h1></div>
-                <h1>
-                    descuento
-                </h1>
-            </div>
-
+      <div class="row m-0 py-3 justify-content-center align-content-center align-items-center course-secundary">
+          <div class="text-md-right text-sm-center mx-2">
+            <h2 class="course-promocion">{{header.tituloPromicion}} /</h2>
+            <span class="course-promocion"> {{header.descripcionPromocion}}</span>
           </div>
-      </div>
-
-    </div>
+          <div class="mx-2">
+            <div class="course-porcentaje">
+              <h2>{{header.porcentajeCupo}}%</h2>
+              <p>Descuento</p>
+            </div>
+          </div>
+        </div>
   </main>
 </client-only>
 </template>
 
 <script>
-export default {
-  props: ['header'],
-  data() {
-    return {
+  import { Hooper, Slide, Navigation as HooperNavigation } from 'hooper';
+  import 'hooper/dist/hooper.css';
 
+  export default {
+    props: ['header'],
+    components:{
+      Hooper,
+      Slide,
+      HooperNavigation
     }
-  }
-};
+  };
 </script>
 
-<style>
-.banner-purple {
-  background: linear-gradient(
-    0deg,
-    rgba(219, 104, 153, 1) 0%,
-    rgba(77, 90, 152, 0.9864320728291317) 100%
-  );
-  height: 380px;
-  display: flex;
-  justify-content: center;
-align-items: center;
-align-content: flex-start;
+<style lang="scss"  scoped>
+.hooper {
+  height: 100%;
+  padding: 0;
 }
-
-.banner-purple .banner-purple-text{
-  display: flex;
-  margin:0 auto;
-  flex-wrap:wrap;
-  justify-content:center !important;
-  width: 100%;
-  height: 200px;
-  margin-top: 40px;
-  line-height: inherit;
-}
-.banner-purple-text p:nth-child(1){
-   color: white;
-   font-weight:normal;
-   font-size: 40px;
-   font-family: "NunitoSans-Light",sans-serif;
-   padding: 0;
-    margin: 0;
-    line-height:43px;
-}
-
-.banner-purple-text .lab {
-   display: flex;
-   flex-wrap: wrap;
-   color: white;
-   font-size: 50px;
-   flex-direction: column;
-   line-height: inherit;
-   text-transform: uppercase;
-}
-.banner-purple-text .lab span{
-   font-size: 50px;
-   font-weight: bold;
-   font-family: "Roboto-Bold",sans-serif;
-
-}
-.banner-purple-text p:nth-child(2){
-   font-family:'Julietta',sans-serif;
-   font-size: 55px;
-   color: white;
-}
-.banner-green {
-  background: #25bc8e;
-  height: 250px;
-  display: flex;
-  justify-content: center;
-  flex-direction:row;
-
-}
-.banner-green .box-off{
-  width: 150px;
-  height: 138px;
-  min-width:180px;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  background-color:#F8DB3B;
-  border-radius: 10px;
-  margin-left: 70px;
-  flex-wrap: wrap;
-  line-height: 10px;
-}
-.banner-green .box-off h1{
-  font-size: 30px;
-}
-.title-box {
-  align-items: flex-end;
-}
-.box-porcentaje{
-  display: flex;
-  position: absolute;
-  align-items: center;
-  bottom: -57px;
-
-
-}
-.box-porcentaje .title-box h2:nth-child(1){
-  font-size:42px;
-}
-.box-porcentaje .title-box h2:nth-child(2){
-  color:#25BC8E;
-  font-size:28px;
-}
-.box-porcentaje .box-off h1{
-  color:#25BC8E;
-}
-
-.box-porcentaje .box-off {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-}
-
-.box-porcentaje .box-off .percentage h1{
-  font-size: 70px;
-  line-height: 63px;
-  /* background-color: red; */
-}
-.container-banner {
-  position: relative;
-  margin: 0;
-}
-.container-box {
-  display: flex;
-  position: absolute;
-  align-items: center;
-  bottom:150px;
-
-}
-.container-box .item-box{
-  width: 200px;
-  height:200px;
-  margin: 10px;
-}
-
-@media (min-width: 780px) and (max-width: 1024px){
-.banner-purple .banner-purple-text{
-  display: flex;
-  flex-wrap:wrap;
-  width: 100%;
-  height: 50%;
-  margin-top: 90px;
-}
-.banner-purple {
-  height: 320px;
-  display: flex;
- justify-content: center;
-}
-
-}
-
-
-@media (max-width: 768px){
-
-.container-box {
-  position:inherit;
-  flex-direction: column;
-  margin-bottom:20px ;
-
-}
-.container-box .item-box{
-  width: 200px;
-  height:200px;
-  margin: 10px;
-}
-
-.banner-purple {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  height: inherit;
+.course {
+  &-slider {
+    width: 100% !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    height: 70vh;
   }
-.banner-purple .banner-purple-text{
-  margin-top: 30vw;
-}
-.banner-purple-text h1{
-  flex-wrap:wrap ;
-}
-.banner-green {
 
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  &-main {
+    background-color: #F6A838;
+  }
 
+  &-secundary {
+    background-color: #25BC8E;
+  }
+
+  &-title {
+    font-family: 'MyriadPro-Semibold', sans-serif;
+    font-size: 3rem;
+    color: #fff;
+    text-align: center;
+  }
+  &-promocion {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-end;
+    font-family: 'MyriadPro-Semibold', sans-serif;
+    font-size: 1.3rem;
+    color: #fff;
+    text-align: center;
+    span:nth-child(1) {
+      display: block;
+      margin-left: 3px;
+      font-weight: 600;
+    }
+  }
+
+  &-porcentaje {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    width:150px;
+    margin: 1rem auto;
+    padding:1.2rem .2rem;
+    background-color: #F6A838;
+    border-radius: 15px;
+      h2 {
+        font-family: 'MyriadPro-Semibold', sans-serif;
+        font-size: 2.5rem;
+        color:#fff;
+      }
+      p {
+        font-family: 'MyriadPro-Semibold', sans-serif;
+        font-size: 1rem;
+        color:#fff;
+      }
+    }
 }
-.box-porcentaje{
-  position: inherit;
-  flex-direction: column-reverse;
-  flex-wrap: wrap;
-  justify-content: center;
-
-}
-
-.banner-green .box-off{
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-left: inherit;
-  margin-top: 15px;
 
 
-}
-.box-porcentaje .title-box h2:nth-child(1){
-  color:white;
-  font-size: 25px;
-  margin-top: 20px;
-  text-align: center;
-
-}
-.box-porcentaje .title-box h2:nth-child(2){
-  color:white;
-   text-align: center;
-
-}
-}
 
 </style>

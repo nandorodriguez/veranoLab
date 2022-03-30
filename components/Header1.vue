@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="banner-first" style="height:3rem; width=100%">
+    <div class="banner-first">
       <p class="color-white">El bienestar es un concepto que nos genera plenitud y satisfacción</p>
     </div>
     <!--Main Menu/ Mobile Menu Section-->
@@ -44,13 +44,12 @@
                 >
               </li>
                <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="/#programas" target="_self"
-                  >PROGRAMAS</a
-                >
+                <a href="/#programas" class="nav-link js-scroll-trigger" target="_self"
+                  >PROGRAMAS</a>
               </li>
                <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="/" target="_self"
-                  >SOMOS</a
+                <a class="nav-link js-scroll-trigger" href="/#nosotros" target="_self"
+                  >NOSOTROS</a
                 >
               </li>
                <li class="nav-item">
@@ -72,19 +71,19 @@
         class="mobile_menu fixed-top hidden d-none"
         id="mainNavMobile"
       >
-       <div class="banner-first" style="height:3rem; width=100%">
+       <div class="banner-first" >
           <p class="color-white text-center">El bienestar es un concepto que nos genera plenitud y satisfacción</p>
        </div>
-        <b-container fluid>
+        <b-container fluid class="px-3">
           <b-navbar-brand to="/"
             ><b-img
               :src="require('../assets/img/logo.png')"
               img-alt="RATH Logo"
-              class="ml-4 ml-sm-4 ml-md-0 mobile-logo my-2"
+              class="mobile-logo my-2"
             ></b-img
           ></b-navbar-brand>
 
-          <b-navbar-toggle class="mr-4 mr-sm-4 mr-md-0" target="nav-collapse">
+          <b-navbar-toggle target="nav-collapse">
             <template v-slot:default="{ expanded }">
               <b-icon v-if="expanded" icon="x"></b-icon>
               <b-icon v-else icon="list"></b-icon>
@@ -95,8 +94,8 @@
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
               <b-nav-item href="/">Inicio</b-nav-item>
-              <b-nav-item href="/#programas">Cursos</b-nav-item>
-              <b-nav-item href="/">Somos</b-nav-item>
+              <b-nav-item href="/#programas">Programas</b-nav-item>
+              <b-nav-item href="/#nosotros">Nosotros</b-nav-item>
               <b-nav-item href="/#contacto">Contacto</b-nav-item>
             </b-navbar-nav>
           </b-collapse>
@@ -109,10 +108,17 @@
 </template>
 
 <script>
+import { redirect } from '@/services/redirectPath'
 export default {
   name: "Header1",
-
-  mounted: function() {
+  methods: {
+    redirect(e, ref) {
+      e.preventDefault();
+      redirect(this.$route.hash, ref)
+    }
+  },
+  mounted() {
+    console.log('esta es la routa: ', this.$route.hash);
     // Menu Js
     this.$nextTick(function() {
       window.onscroll = function() {
@@ -140,12 +146,13 @@ export default {
 /* Mobile Dropdown CSS */
 .banner-first{
   background:linear-gradient(270deg, rgba(218,194,96,1) 0%, rgba(111,190,199,1) 100%);
- display: flex;
- justify-content: center;
- align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .banner-first p{
-  font-size: 1.4vh;
+  font-size: 1.2rem;
+  margin: 1rem 0;
 }
 .menu-section-area #mainNavMobile.navbar {
   background-color: #fff;
@@ -216,5 +223,12 @@ ul.dropdown-menu .dropdown-item {
 .dropdown-menu {
   border: none;
   border-radius: 0;
+}
+
+@media(max-width: 400px) {
+  .banner-first p{
+    font-size: 0.8rem;
+    margin: 1rem 0.8rem;
+  }
 }
 </style>

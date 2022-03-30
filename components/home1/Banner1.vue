@@ -10,12 +10,12 @@
               <div class="hero-area-wrapper d-flex flex-row wow fadeInLeft">
                 <div class="hero-area-content text-break">
                   <div class="hero-area-content-img"></div>
-                  <p class="title text-center " data-aos="fade-right"></p>
+                  <p class="title text-center "></p>
                   <br>
-                  <p class="desc text-center" data-aos="fade-right">{{ slider[index].descripcionSlider }}</p>
+                  <p class="desc text-center">{{ slider[index].descripcionSlider }}</p>
                   <br>
-                  <div class="hero-button-box py-2 py-md-5">
-                    <span href="#" class="theme-btn" data-aos="fade-right">{{ slider[index].textoBoton }}</span>
+                  <div v-if="slider[index].textoBoton " class="hero-button-box py-2 py-md-5">
+                    <a :href="slider[index].urlBoton" class="theme-btn">{{ slider[index].textoBoton }}</a>
                   </div>
                 </div>
               </div>
@@ -29,9 +29,11 @@
         </span>
       </div>
     </header>
+    <a class="nosotros" name="nosotros">
     <div class="banner-yellow d-flex align-items-center justify-content-center">
-      <p class="text-center">¿Que somos y ofrecemos?</p>
+      <p class="text-center">Quienes somos y que ofrecemos?</p>
     </div>
+    </a>
   </div>
 </client-only>
 </template>
@@ -104,7 +106,7 @@ export default {
     intervalTime(){
       setInterval(()=>{
         this.next();
-      }, 10000);
+      }, 15000);
     },
     onKeydown(e) {
       switch (e.key) {
@@ -138,12 +140,14 @@ export default {
   display: block;
   margin-left: -4rem;
   margin-right: 8rem ;
+
   .vertical {
     display: block;
     background-color: #fff;
     width: 2px;
     height: 150px;
   }
+
   .number-indice h2 {
     display: block;
     z-index: 29;
@@ -179,40 +183,36 @@ export default {
 }
 
 .subtitle {
-    font-family: "Mukta",Sans-serif;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    text-transform: uppercase;
-    line-height: 64px;
-    letter-spacing: 1.6px;
-    margin-top: 0;
-  }
+  font-family: "Mukta",Sans-serif;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 64px;
+  letter-spacing: 1.6px;
+  margin-top: 0;
+}
 
 .title {
-
-    z-index: 9;
-    font-size: 1.8rem;
-    color: rgb(255, 255, 255);
-    font-family: 'Julietta', sans-serif;
-    visibility: inherit;
-    text-align: center;
-    align-items: flex-start;
-    border-width: 0px;
-    margin: 0px;
-    padding: 0px;
-    opacity: 1;
-    white-space: initial;
-    width: 100%;
-    line-height: 3.6rem;
-  
-
-
+  z-index: 9;
+  font-size: 1.8rem;
+  color: rgb(255, 255, 255);
+  font-family: 'Julietta', sans-serif;
+  visibility: inherit;
+  text-align: center;
+  align-items: flex-start;
+  border-width: 0px;
+  margin: 0px;
+  padding: 0px;
+  opacity: 1;
+  white-space: initial;
+  width: 100%;
+  line-height: 3.6rem;
 }
 .desc {
   z-index: 10;
   white-space: normal;
-  font-size: 16px;
+  font-size: 25px;
   line-height: 31px;
   font-weight: 300;
   color: rgb(255, 255, 255);
@@ -232,7 +232,7 @@ export default {
   overflow: hidden;
   z-index: 1;
   height: 100%;
-  
+
 }
 .hero-area-wrapper{
 background-image: url("@/assets/img/1x/verano.png");
@@ -242,7 +242,7 @@ background-image: url("@/assets/img/1x/verano.png");
   width: 100%;
   position: relative;
   top: -100px;
-  
+
 }
 
 .hero-area-content {
@@ -253,7 +253,7 @@ background-image: url("@/assets/img/1x/verano.png");
   width: 100%;
   position: absolute;
   bottom: -198px;
-  
+
 }
 
 
@@ -293,8 +293,8 @@ background-image: url("@/assets/img/1x/verano.png");
    font-size: 3.2rem;
    line-height: 3.2rem;
 
-   
-   
+
+
 }
 
 @media(max-width: 1024px ){
@@ -314,6 +314,11 @@ background-image: url("@/assets/img/1x/verano.png");
 
 }
 @media(max-width: 768px) {
+
+  .banner-yellow p {
+    font-size: 2.4rem;
+  }
+
   .home-banner-rg {
     display: none;
   }
@@ -327,7 +332,7 @@ background-image: url("@/assets/img/1x/verano.png");
     width: 30px;
   }
 
-  
+
 
   .line {
     display: none;
@@ -335,19 +340,20 @@ background-image: url("@/assets/img/1x/verano.png");
     margin-right: 0 ;
   }
   .desc {
-  margin-top: 60px;
-
-}
+    margin-top: 60px;
+    width:100%;
+  }
   .hero-area-content {
   bottom: -176px;
-  
+
 }
 
 }
 
 @media(min-width:768px){
-     .title {
+  .title {
     font-size: 3.4rem;
-}
+  }
+  
 }
 </style>

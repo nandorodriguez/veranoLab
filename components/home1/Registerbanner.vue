@@ -1,6 +1,6 @@
 <template>
 <client-only>
-  <main class="row register-main mt-md-5">
+  <main class="row mx-0 register-main mt-md-5">
     <section class="container-main-left col-lg-4 col-md-5 col-sm-12 mr-lg-5 ">
       <div class="section-learn">
         <span>{{body.subtituloContenido}}</span>
@@ -12,6 +12,7 @@
       </div>
       <div class="question-item">
         <div v-if="body.contenidoGeneral" v-html="body.contenidoGeneral"></div>
+        <Btn :body="body"/>
       </div>
     </section>
     <section class="container-main-right col-lg-4 col-md-4 col-sm-12">
@@ -40,21 +41,19 @@
         </div>
       </div>
       <div class="main-text-register">
-        <div class="banner-yellow">
-          <a v-if="body.urlLink" :href="body.urlLink">Inscríbete al programa aquí </a>
-        </div>
+        <Btn :body="body"/>
         <div>
           <p>Cupos vendidos hasta hoy</p>
         </div>
         <div v-if="body.porcentajeCupo" class="loading-bar"> <div class="load" :style="`width:${body.porcentajeCupo}%`"></div><span>{{body.porcentajeCupo}} %</span></div>
         <div v-if="body.cuposDisponible" class="final-title"><h2>{{body.cuposDisponible}} cupos disponibles</h2></div>
-          <p>Si tienes preguntas haz <a href="#">clic aquí</a></p>
+          <p v-if="body.urlPoliticas">Si tienes preguntas haz <a :href="body.urlPoliticas" target="blank">Clic aquí</a></p>
       </div>
       <div v-if="body.imagenesExtras" class="row mx-0 pt-4">
         <img class="img-fluid"  :key="idx" v-for="(image, idx) in body.imagenesExtras" :src="image.url" :alt="image.fileName" />
       </div>
     </section>
-    <Testimonial/>
+    <Testimonial :data="body.testimonio"/>
   </main>
 </client-only>
 </template>
@@ -134,7 +133,7 @@ export default {
 
       if (duration.days() <= 0 && duration.hours() <= 0 && duration.minutes() <= 1 && duration.seconds() <= 0) {
         console.log('los dias son:', duration.days());
-        
+
         console.log("esta es la fecha a actualizar: ", this.dateUpdate);
         this.cont = this.cont +1;
 
@@ -149,7 +148,7 @@ export default {
             window.location.reload();
           }, 10000)
         }
-      } 
+      }
     },
   },
   created() {
@@ -165,7 +164,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .register-main {
   margin: 0 auto;
   display: flex;
@@ -209,6 +208,14 @@ export default {
   color: F6A838;
   margin: 20px 0;
   font-size:20px ;
+}
+
+.border-prom {
+  border: 2px double #ff9311;
+  margin: 1rem auto;
+  padding:.3rem;
+  border-radius: 15px;
+  width:80%;
 }
 
 .main-text-container h2:nth-child(1){

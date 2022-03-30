@@ -11,9 +11,9 @@
                 <ul class="d-flex py-4 px-3 mx-3 flex-wrap justify-content-center">
                     <li><a class="item-footer  px-3 mb-5" href="/">INICIO</a></li>
                     <li><a class="item-footer  px-3 mb-5" href="/#programas">CURSOS</a></li>
-                    <li><a class="item-footer  px-3 mb-5" href="">SOMOS</a></li>
+                    <li><a class="item-footer  px-3 mb-5" href="/#nosotros">NOSOTROS</a></li>
                     <li><a class="item-footer  px-3 mb-5" href="/#contacto">CONTACTO</a></li>
-                
+
                 </ul>
             </div>
             <div class="row m-0 flex-nowrap align-items-center align-content-center content">
@@ -21,7 +21,7 @@
                     <div class="divisor"></div>
                 </div>
                 <div class="col-md-2">
-                    <div class="row f d-flex flex-nowrap justify-content-center align-items-center align-content-center">
+                    <div class="row mx-0 d-flex flex-nowrap justify-content-center align-items-center align-content-center">
                         <div class="col-2 text-center">
                             <a target="blank" href="https://www.instagram.com/verano.lab/"><i class="fab fa-instagram"></i></a>
                         </div>
@@ -38,7 +38,8 @@
                     <div class="divisor"></div>
                 </div>
             </div>
-            <div class="row m-0 justify-content-center mt-5">
+            <div class="row m-0 justify-content-center flex-column mt-5">
+                <p class="text-white text-center mb-3">Contactanos en:  hola@veranolab.com</p>
                 <p class="text-white text-center">Copyright © 2022 - Madatto&MOSScreativo</p>
             </div>
         </div>
@@ -60,7 +61,7 @@ export default {
         padding: 120px 0;
     }
 
-    
+
      .links {
        font-size: 24px;
        font-weight: 400;

@@ -17,15 +17,54 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" },
       { href:"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel:"stylesheet", integrity: "sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin:"anonymous"}
     ],
     scripts: [
       { src: "//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"},
-      { src: "https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.1/jquery.fancybox.min.js" }
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.1/jquery.fancybox.min.js" },
+      { src: "https://www.google.com/recaptcha/api.js" },
     ]
   },
+
+  /*
+  ** Router configuration
+  */
+  router: {
+    scrollBehavior: async function(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition;
+      }
+
+      const findEl = async (hash, x = 0) => {
+        return (
+          document.querySelector(hash) ||
+          new Promise(resolve => {
+            if (x > 50) {
+              return resolve(document.querySelector("#app"));
+            }
+            setTimeout(() => {
+              resolve(findEl(hash, ++x || 1));
+            }, 100);
+          })
+        );
+      };
+
+      if (to.hash) {
+        let el = await findEl(to.hash);
+        if ("scrollBehavior" in document.documentElement.style) {
+          return window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
+        } else {
+          return window.scrollTo(0, el.offsetTop);
+        }
+      }
+
+      return { x: 0, y: 0 };
+    }
+  },
+
+  loading: { color: "#DF1683" },
 
   graphql: {
     clients: {
@@ -53,7 +92,8 @@ export default {
     {src: '~/plugins/main.js'},
     {src: '~/plugins/lightbox.js', ssr: false},
     {src: '~/plugins/carousel.js', ssr: false},
-    {src: '~/plugins/aos.js', ssr: false}
+    {src: '~/plugins/aos.js', ssr: false},
+    {src: '~/plugins/scroll.js', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

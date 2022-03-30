@@ -1,8 +1,8 @@
 <template>
 <client-only>
 <div class="testimonial">
-  <hooper :itemsToShow="1" :centerMode="true" pagination="no" :autoplay ="true" :infiniteScroll="true" :playSpeed="5000" :wheelControl="false">>
-    <slide v-if="testimonials" key="idx" v-for="(testimonio, idx) in testimonials" class="testimonial-slider">
+  <hooper :itemsToShow="1" :centerMode="true" pagination="no" :autoplay ="true" :infiniteScroll="true" :playSpeed="5000" :wheelControl="false">
+    <slide v-if="data" :key="idx" v-for="(testimonio, idx) in data" class="testimonial-slider">
       <div class="d-flex justify-content-center align-items-center slign-content-center flex-column">
         <img class="mb-4" :src="testimonio.imagenPersona.url" alt="testimonio.imagenPersona.fileName">
         <div class="desc">“{{testimonio.descripcion}}”</div>
@@ -20,50 +20,14 @@
 <script>
 import { Hooper, Slide, Navigation as HooperNavigation } from 'hooper';
 import 'hooper/dist/hooper.css';
-import { gql } from "nuxt-graphql-request";
 export default {
   name: 'Testimonial',
+  props:['data'],
   components:{
-    Hooper, 
+    Hooper,
     Slide,
     HooperNavigation
-  },
-  data() {
-    return {
-      testimonials: {}
-    }
-  },
-  created() {
-    this.fetchData();
-  },
-  watch: {
-    $route: "fetchData"
-  },
-  methods: {
-    async fetchData() {
-      const query = gql`
-        query Testimonios {
-          testimonio {
-            imagenPersona {
-              url
-              fileName
-            }
-            descripcion
-            nombrePersona
-            personaInfo
-          }
-        }
-      `;
-
-      try {
-        const data = await this.$graphql.default.request(query);
-        this.testimonials = data.testimonio;
-        // console.log(JSON.stringify(data.testimonio, undefined, 2));
-      } catch (e) {
-        console.error(JSON.stringify(e, undefined, 2));
-      }
-    }
-  },
+  }
 }
 </script>
 <style scoped>

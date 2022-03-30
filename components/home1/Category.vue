@@ -1,12 +1,12 @@
 <template >
 <client-only>
 <div>
-  <a class="programas" name="programas">
-    <div class="row container-banner d-flex justify-content-center mt-5">
+
+    <div class="row mx-0 container-banner d-flex justify-content-center mt-5">
     <div class="col-lg-3 col-md-3 item-image mt-md-5 d-flex justify-content-lg-end justify-content-md-end  mt-lg-5 justify-content-center my-5" >
      <img src="@/assets/img/logobanner.png"  class="item-image-banner px-lg-4"  alt="">
     </div>
-    <div class="col-lg-7 col-md-6 item-text d-flex text-justify justify-content-lg-start  justify-content-md-end ">
+    <div class="col-lg-5 col-md-6 item-text d-flex text-justify justify-content-lg-start  justify-content-md-end ">
       <p>
         El bienestar es un concepto que nos genera plenitud y satisfacción en
         varios aspectos de nuestras vidas que incluye el aspecto físico,
@@ -27,15 +27,19 @@
         todo a disfrutar
       </p>
     </div>
-    <div class="box col-lg-11 box col-md-11 d-flex flex-wrap  justify-content-center">
-    <a  class="box-item color  p-4  m-sm-4  m-lg-3 "  :key="idx" v-for="(data, idx) in category" :style="`background:${data.colorGradiente}`" :href="`/detalle/${data.id}`">
-      <p>{{data.titulo}}</p>
-      <h1>0{{idx+1}}</h1>
-      <p>{{data.descripcion}}</p>
-    </a>
+    <section id="programas">
+    <div class="row mx-0 mt-5  justify-content-center">
+      <div class="col-md-3 col-sm-12 box-item color" :key="idx" v-for="(data, idx) in category" :style="`background:${data.colorGradiente}`">
+          <a @click="number(idx+1)" :href="`/detalle/${data.id}`">
+          <h1 class="title-box">{{data.titulo}} 0{{idx+1}}</h1>
+          <h3 class="subtitle-box">{{data.subtitulo}}</h3>
+          <p class="desc-box">{{data.descripcion}}</p>
+        </a>
+      </div>
     </div>
+    </section>
   </div>
-  </a>
+
 </div>
 </client-only>
 </template>
@@ -47,45 +51,7 @@ export default {
 
   data(){
     return{
-      box:[
-        {
-          title:"LAB1",
-          number:"01",
-          desc:"Descriptor de lo que es este laboratorio promueve.",
-          color:"linear-gradient(0deg, rgba(219,104,153,1) 0%, rgba(77,90,152,0.9864320728291317) 100%)"
-         },
-         {
-          title:"LAB2",
-          number:"02",
-          desc:"Descriptor de lo que es este laboratorio promueve.",
-          color:"linear-gradient(0deg, rgba(226,195,88,1) 0%, rgba(108,190,203,1) 100%)"
-         },
-         {
-          title:"LAB3",
-          number:"03",
-          desc:"Descriptor de lo que es este laboratorio promueve.",
-          color:"linear-gradient(0deg, rgba(214,235,239,1) 0%, rgba(108,190,203,1) 100%)"
-         },
-         {
-          title:"LAB4",
-          number:"04",
-          desc:"Descriptor de lo que es este laboratorio promueve.",
-          color:"linear-gradient(0deg, rgba(243,206,167,1) 0%, rgba(215,71,123,1) 100%)"
-         },{
-          title:"LAB5",
-          number:"05",
-          desc:"Descriptor de lo que es este laboratorio promueve.",
-          color:"linear-gradient(0deg, rgba(229,158,192,1) 0%, rgba(141,200,192,1) 100%)"
-         },
-         {
-          title:"LAB6",
-          number:"06",
-          desc:"Descriptor de lo que es este laboratorio promueve.",
-          color:"linear-gradient(0deg, rgba(114,177,224,1) 0%, rgba(221,114,137,1) 100%)"
-         }
-      ],
       category: {}
-
     }
   },
   created() {
@@ -95,6 +61,11 @@ export default {
     $route: 'fetchData',
   },
   methods: {
+    number(id) {
+      if (id) {
+        localStorage.setItem('numID', id);
+      }
+    },
     async fetchData() {
       this.service = null
       try {
@@ -104,6 +75,7 @@ export default {
               categoria {
                 id
                 titulo
+                subtitulo
                 descripcion
                 colorGradiente
               }
@@ -128,38 +100,47 @@ export default {
 .container-banner{
     margin: 100px 0;
 }
+
+.contain-boxs  {
+
+}
+
 .item-image-banner{
  height: 180px;
 }
-.box{
-    margin: 40px 0;
 
-}
 .item-text{
   color: #777c87;
 }
+
 .item-text p{
   line-height:1.6rem ;
   font-weight: 100 !important;
   font-family: "Roboto-Condensed",sans-serif;
 }
+
 .box-item{
     min-height: 300px;
     width:250px;
     margin: 8px;
+    padding: 1.5rem 1.8rem;
     color:white !important;
 }
-.box-item p:nth-child(1){
+
+.title-box{
   font-family: "NunitoSans-Light",sans-serif;
   font-size: 42px;
 }
-.box-item h1:nth-child(2){
+
+.subtitle-box{
   font-family: 'Roboto-Condensed',sans-serif;
-  font-weight: bold;
-  font-size: 42px;
+  font-size: 30px;
+  padding: 0.5rem 0;
 
 }
-.box-item p:nth-child(2){
+.desc-box{
   font-family: 'Roboto-Condensed',sans-serif;
+  color: #fff;
+  font-size: 20px;
 }
 </style>

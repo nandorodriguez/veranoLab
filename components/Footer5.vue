@@ -4,7 +4,7 @@
     <!-- Footer Start -->
     <footer class="copyright-area">
         <div class="container">
-            <div class="row">
+            <div class="row mx-0">
                 <div class="col-md-12">
                     <div class="copyright-wrapper d-flex justify-content-between align-items-center">
                         <div class="copyright-text">

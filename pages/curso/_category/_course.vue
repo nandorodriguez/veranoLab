@@ -72,9 +72,18 @@ export default {
                     porcentajeCupo
                     cuposDisponible
                     cuposOcupados
+                    urlPoliticas
                     imagenesExtras {
                       url
                       fileName
+                    }
+                    testimonio {
+                      id
+                      nombrePersona
+                      descripcion
+                      imagenPersona {
+                        url
+                      }
                     }
                   }
                 }

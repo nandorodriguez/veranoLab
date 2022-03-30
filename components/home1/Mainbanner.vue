@@ -4,9 +4,9 @@ import Category from '@/components/home1/Category.vue';
   <main v-if="category">
     <div class="container-purple d-flex flex-wrap justify-content-sm-center justify-content-md-between  align-items-center align-content-center">
       <div class="text-banner-left">
-        <p>{{ category.titulo }} <br /><b>01</b></p>
+        <p>{{ category.titulo }} <br /><b>0{{idNumber}}</b></p>
       </div>
-      <div class="text-banner-right"><p>Bienestar</p></div>
+      <div class="text-banner-right"><p>{{category.bannerTitle}}</p></div>
     </div>
     <div class="row container-banner-center d-flex justify-content-between">
       <div
@@ -28,12 +28,14 @@ import Category from '@/components/home1/Category.vue';
         </p>
       </div>
       <div
-        class="container-banner-left col-lg-5 col-md-6 px-0 col-sm-12  "
+        v-if="category.imagenContenidoCategoria"
+        class="container-banner-left col-lg-5 col-md-6 px-0 col-sm-12"
+        :style="`backgroundImage: url(${category.imagenContenidoCategoria.url})`"
       ></div>
     </div>
     <div class="d-flex justify-content-center align-content-center align-items-center flex-column">
       <div class="box-container justify-content-center">
-        <div class="container-content row">
+        <div class="container-content row mx-0">
           <div class="content-title col-lg-6  col-md-6">
             <span>{{ category.subtituloAreaCursos }}</span>
             <h1>{{ category.tituloAreaCursos }}</h1>
@@ -45,17 +47,20 @@ import Category from '@/components/home1/Category.vue';
           </div>
         </div>
         <div class="container-main mb-5">
-            <div class="row">
-              <div class="col-sm-12 col-md-6 p-0">
-                <div v-key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" :style="`backgroundImage: url(${curso.imagePrincipal.url})`" v-if="idx < secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
-                  <div class="description position-absolute fixed-bottom" :style="`backgroundColor: ${curso.color}`">
-                    <p>0{{ idx + 1 }}. {{ curso.titulo }}</p>
+            <div class="row mx-0">
+              
+              <div v-if="category.cursosDisponibles" class="col-sm-12 col-md-6 p-0">
+                <div :key="idx" v-for="(curso, idx) of category.cursosDisponibles" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)" class="position-relative">
+                  <img v-if="idx < secuencia && curso.imagePrincipal !=null"  :src="curso.imagePrincipal.url" class="box" :alt="curso.imagePrincipal.url">
+                  <div class="description" :style="`backgroundColor: ${curso.color}`" v-if="idx < secuencia && curso.imagePrincipal !=null">
+                      <p>0{{ idx + 1 }}. {{ curso.titulo }}</p>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12 col-md-6 px-0" :class="(secuencia % 2 != 0)? 'mbm': ''">
-                <div v-key="idx" v-for="(curso, idx) of category.cursosDisponibles" class="box" :style="`backgroundImage: url(${curso.imagePrincipal.url})`" v-if="idx>= secuencia" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)">
-                  <div class="description position-absolute fixed-bottom" :style="`backgroundColor: ${curso.color}`">
+              <div v-if="category.cursosDisponibles" class="col-sm-12 col-md-6 px-0" :class="(secuencia % 2 != 0)? 'mbm': ''">
+                <div :key="idx" v-for="(curso, idx) of category.cursosDisponibles" @click="redirectCourse(`/curso/${category.id}/${curso.id}`)" class="position-relative">
+                  <img v-if="idx>= secuencia && curso.imagePrincipal !=null"  :src="curso.imagePrincipal.url" class="box" :alt="curso.imagePrincipal.url">
+                  <div class="description" :style="`backgroundColor: ${curso.color}`" v-if="idx>= secuencia && curso.imagePrincipal !=null">
                     <p>0{{ idx + 1 }}. {{ curso.titulo }}</p>
                   </div>
                 </div>
@@ -74,7 +79,8 @@ export default {
   data() {
     return {
       category: {},
-      secuencia: 0
+      secuencia: 0,
+      idNumber: localStorage.getItem('numID') || ''
     };
   },
   created() {
@@ -94,6 +100,10 @@ export default {
                 titulo
                 descripcion
                 subtituloContenido
+                imagenContenidoCategoria {
+                  url
+                }
+                bannerTitle
                 tituloContenido
                 descripcionContenido
                 listaContenido
@@ -147,7 +157,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .mbm {
   padding-top: 78px;
 }
@@ -230,11 +240,8 @@ export default {
 .box {
   min-width: 100%;
   width: 100%;
-  height: 450px;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: cover;
   position: relative;
+  cursor: pointer;
   margin: 0;
 }
 
@@ -256,10 +263,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 130;
 }
 .container-main .description p {
   color: #253852;
   font-size: 24px;
+  padding:0 1rem;
+  cursor: pointer;
 }
 
 .descriptiong {
@@ -288,6 +298,14 @@ export default {
 }
 
 @media (max-width: 760px) {
+ 
+  .descriptiong p, .content-title {
+    padding: 15px 0px;
+  }
+
+  .box-container, .container-banner-center {
+    width: 90%;
+  }
   .container-purple {
     margin-top: 78px;
   }
@@ -303,5 +321,12 @@ export default {
   .text-banner-left p b {
     font-size: 44px;
   }
+}
+@media(max-width: 500px) {
+ 
+  .box-container {
+    width: 90%;
+  }
+
 }
 </style>
