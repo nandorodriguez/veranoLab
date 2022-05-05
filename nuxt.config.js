@@ -13,7 +13,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Verano Lab es un laboratorio de experiencias para todos. Cada minuto en la vida  que pasa es irrecuperable y debemos ser los responsables de vivir.' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [

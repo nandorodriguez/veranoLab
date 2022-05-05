@@ -34,6 +34,17 @@ export default {
     return {
     }
   },
-  scrollToTop: true
+  scrollToTop: true,
+  head() {
+      return {
+        title: 'Inicio::El bienestar es un concepto que nos genera plenitud y satisfacción.',
+        link: [
+        {
+          rel: 'canonical',
+          href: window.location.href
+        }
+      ]
+      }
+    }
 }
 </script>

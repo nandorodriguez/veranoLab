@@ -1,11 +1,9 @@
 <template>
   <section v-if="body.urlLink" class="p-0">
     <a :href="body.urlLink" target="blank">
-      <div class="border-prom">
-        <div class="btn-prom">
-          <small>{{body.linkTexto}}</small>
-        </div>
-      </div>
+      <button class="btn-prom">
+        <small>{{body.linkTexto}}</small>
+      </button>
     </a>
   </section>
 </template>
@@ -22,26 +20,29 @@ data(){
 </script>
 <style lang="scss" scoped>
 .btn-prom {
-  width: 100%;
-  display: flex;
+  margin: 1rem auto;
   position: relative;
+  display: flex;
   flex-direction: row;
-  border-radius: 10px;
-  padding: 2.8rem 3.1rem 2.8rem 1.2rem;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3rem;
+  padding: 1.4rem 4.5rem ;
   background: rgb(255,147,17);
   background: linear-gradient(90deg, rgba(255,147,17,1) 23%, rgba(214,82,110,1) 100%);
   small {
     color: #fff;
     font-family: 'Roboto-Condensed',sans-serif;
-    font-size: 20px;
+    font-size: 1.8rem;
     text-transform: uppercase;
   }
 
   &:after {
-    content: '\276D\276D';
-    font-size: 18px;
+    content: '\276D';
+    font-size: 20px;
     position: absolute;
-    right: 20px;
+    right: 1.8rem;
     color: #fff;
   }
 

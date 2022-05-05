@@ -10,7 +10,7 @@
             <div class="row m-0 d-flex justify-content-center align-items-center">
                 <ul class="d-flex py-4 px-3 mx-3 flex-wrap justify-content-center">
                     <li><a class="item-footer  px-3 mb-5" href="/">INICIO</a></li>
-                    <li><a class="item-footer  px-3 mb-5" href="/#programas">CURSOS</a></li>
+                    <li><a class="item-footer  px-3 mb-5" href="/#programas">PROGRAMAS</a></li>
                     <li><a class="item-footer  px-3 mb-5" href="/#nosotros">NOSOTROS</a></li>
                     <li><a class="item-footer  px-3 mb-5" href="/#contacto">CONTACTO</a></li>
 
